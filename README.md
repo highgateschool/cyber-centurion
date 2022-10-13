@@ -165,7 +165,7 @@ As usual, the easiest way to use `dnf` is to press the tab key lots... but the m
 
 - `sudo dnf update` - will upgrade all installed packages
 - `sudo dnf install terminator` - will install the terminator package
-- `sudo dnf install terminator` - will remove the terminator package
+- `sudo dnf remove terminator` - will remove the terminator package
 
 # Services
 
