@@ -93,8 +93,42 @@ Distributions will differ in how they manage some of the "higher level" function
 
 The Debian project was started in 1993 by a man called Ian. His girlfriend's name was Debra. Geddit? They married but eventually divorced. Oh well.
 
-Debian used the program `apt` (Advanced Packaging Tool) to manage packages. Nowadays we use the `apt-get` command 
+Debian used the program `apt` (Advanced Packaging Tool) to manage packages. Nowadays we use the `apt` command but you will find a lot of resources using `apt-get` which is pretty much the same.
+
+The idea is that there are packages stored on Debian servers all over the world and you can use `apt` both to download and install the files, but also make sure that all _dependencies_ are satisfied to allow them to work.
+
+The most useful commands are below, but the good news is that pressing tab lots will tell you the available options as you go!
+
+- `sudo apt update` - updates the information about available packages. **It doesn't install anything**.
+- `sudo apt upgrade` - upgrades all installed packages to the latest version in the distribution indexes
+- `sudo apt install terminator` - would install the terminator terminal
+- `sudo apt remove terminator` - would uninstall it
+- `apt list` - on its own will list _all_ available packages
+- `apt list terminator` - will tell you the available version of terminator
+- `apt show terminator` - will give you _lots of information_ about terminator!
+- `apt search terminal` - will tell you all packages whose description involves the word terminal
+- `sudo apt autoremove` - will remove any packages that don't need to be installed any more
+- Notice that the `apt` commands that do something need sudo. The ones that just tell you stuff don't (but you can use it anyway)
+- A cool command that I use lots - can you see why it works? `sudo apt update && sudo apt upgrade`
 
 ## Ubuntu
 
+Debian is a huge and slow project. Ubuntu is like the trendy younger sibling.
+
+So the good news is that *you use `apt` in exactly the same way as Ubuntu*!
+
+The even better news: Ubuntu and Debian have a program called Software Centre that can be used to manage installation and removal from a window.
+
+There is also a Software Updates that can be used to manage system updates and to choose what sources are being used, but if you like to do it the hard way:
+
+`/etc/apt/sources.list` - is the file where Debian and Ubuntu record what online sites they are using to download their index files, and then to install packages.
+
+- Most of the content of these files are comments - just like in Python, anything beginning with a `#` is ignored
+- So to disable any repository you can just add a `#` at the beginning of the line 
+- The lines ending `main restricted` describe the packages that will always normally be installed on Ubuntu - you wouldn't normally get rid of these!
+- The lines ending `universe` and `multiverse` refer to software that isn't part of the main distribution and can be commented out if you are trying to be super-secure
+
 ## Fedora
+
+The first distribution that I installed was Red Hat Linux 3 (in 1997). This was retired in 2004 and the project lived on as Fedora (the Red Hat Logo is a red fedora hat).
+
