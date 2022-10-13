@@ -169,6 +169,23 @@ As usual, the easiest way to use `dnf` is to press the tab key lots... but the m
 
 # Services
 
-Virtually all the background processes in Linux are run using services. So, for instance, there is a service called "ssh" that runs in the background waiting for people to login using a secure shell. The useful command here is `systemctl` (system control). As ever, the tab key is your friend...
+Virtually all the background processes in Linux are run using services. So, for instance, there is a service called "ssh" that runs in the background waiting for people to login using a secure shell. The useful command here is `systemctl` (system control). As ever, the tab key is your friend, but I don't think I need to explain these...
 
+- `sudo systemctl enable ssh`
+- `sudo systemctl start ssh`
+- `sudo systemctl stop ssh`
+- `sudo systemctl restart ssh`
+- `sudo systemctl disable ssh`
+- `sudo systemctl status ssh`
 
+You obviously need to use `sudo` here because **there is the potential to cause lots of damage**.
+
+Remember that you can list all services using
+
+`getent services`
+
+and find a specific one using
+
+`getent services | grep ssh`
+
+This has the bonus of also telling you which network port is being used!
