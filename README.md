@@ -83,6 +83,25 @@ Managing users and groups (eg adm or sudo)
 - `getent services` - will tell you all the services
 - `getent services ssh` - will tell you about the ssh service
 
+## Searching and working with text
+
+Here are a few useful tricks:
+- `cat /etc/apt/sources.list` will show the contents of the `source.list` file
+- `sudo nano /etc/apt/sources.list` will allow you to edit the contents of the above file (sudo because the `/etc` folder is restricted)
+- `less /var/log/syslog` will allow you to scroll up and down the system log
+- `cat /var/log/syslog | less` will "pipe" the contents of the log through the same `less` program
+- `cat /var/log/syslog | grep agnes` will find all entries of the log involving the user "agnes"
+- `cat /var/log/syslog | grep agnes | less` will find all entries of the log involving the user "agnes" and then let you scroll up and down using `less`
+
+The `grep` command is very powerful. We can use it in a variety of ways:
+
+- `grep deb /etc/apt/sources.list` will find all lines in the file including the word "deb"
+- `cat /etc/apt/sources.list | grep deb` does exactly the same thing
+- `cat /etc/apt/sources.list | grep ^deb` finds the lines that **start with "deb"** (that's what the "`^`" symbol does) 
+- `cat /etc/apt/sources.list | grep restricted$` finds the lines that **end with "restricted"** (that's what the "`$`" symbol does)
+
+We can use `grep` 
+
 # Distributions
 
 Once you have the linux kernel you have to wrap it up in something that people can use. This is called the distribution. Most well known distribution have a lot in common. Since they all are part of the Linux project they will have the same basic file structures and most of the same core programs available.
@@ -111,6 +130,8 @@ The most useful commands are below, but the good news is that pressing tab lots 
 - Notice that the `apt` commands that do something need sudo. The ones that just tell you stuff don't (but you can use it anyway)
 - A cool command that I use lots - can you see why it works? `sudo apt update && sudo apt upgrade`
 
+Underneath the bonnet there is another command called `dpkg` but I wouldn't use that unless you really need to.
+
 ## Ubuntu
 
 Debian is a huge and slow project. Ubuntu is like the trendy younger sibling.
@@ -131,4 +152,14 @@ There is also a Software Updates that can be used to manage system updates and t
 ## Fedora
 
 The first distribution that I installed was Red Hat Linux 3 (in 1997). This was retired in 2004 and the project lived on as Fedora (the Red Hat Logo is a red fedora hat).
+
+Fedora uses the command `dnf` to manage packages. Old resources will talk about `yum` but this was retired a long time ago.
+
+As usual, the easiest way to use `dnf` is to press the tab key lots... but the main commands are:
+
+- `sudo dnf update` - will upgrade all installed packages
+- `sudo dnf install terminator` - will install the terminator package
+- `sudo dnf install terminator` - will remove the terminator package
+
+
 
