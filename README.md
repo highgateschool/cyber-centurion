@@ -83,24 +83,30 @@ Managing users and groups (eg adm or sudo)
 - `getent services` - will tell you all the services
 - `getent services ssh` - will tell you about the ssh service
 
-## Searching and working with text
+## Searching for wordsand working with text
 
 Here are a few useful tricks:
 - `cat /etc/apt/sources.list` will show the contents of the `source.list` file
 - `sudo nano /etc/apt/sources.list` will allow you to edit the contents of the above file (sudo because the `/etc` folder is restricted)
 - `less /var/log/syslog` will allow you to scroll up and down the system log
 - `cat /var/log/syslog | less` will "pipe" the contents of the log through the same `less` program
-- `cat /var/log/syslog | grep agnes` will find all entries of the log involving the user "agnes"
-- `cat /var/log/syslog | grep agnes | less` will find all entries of the log involving the user "agnes" and then let you scroll up and down using `less`
+- `cat /var/log/syslog | grep "agnes"` will find all entries of the log involving the user "agnes"
+- `cat /var/log/syslog | grep "agnes" | less` will find all entries of the log involving the user "agnes" and then let you scroll up and down using `less`
 
 The `grep` command is very powerful. We can use it in a variety of ways:
 
 - `grep deb /etc/apt/sources.list` will find all lines in the file including the word "deb"
-- `cat /etc/apt/sources.list | grep deb` does exactly the same thing
-- `cat /etc/apt/sources.list | grep ^deb` finds the lines that **start with "deb"** (that's what the "`^`" symbol does) 
-- `cat /etc/apt/sources.list | grep restricted$` finds the lines that **end with "restricted"** (that's what the "`$`" symbol does)
+- `cat /etc/apt/sources.list | grep "deb"` does exactly the same thing
+- `cat /etc/apt/sources.list | grep "^deb"` finds the lines that **start with "deb"** (that's what the "`^`" symbol does) 
+- `cat /etc/apt/sources.list | grep "restricted$"` finds the lines that **end with "restricted"** (that's what the "`$`" symbol does)
 
-We can use `grep` 
+We can use `grep` with the output of any other command and that is where it gets really useful...
+
+- The `find` command is really powerful but run on its own it will produce a vast amount of output
+- `find | grep "agnes"` will find all files that contain the word "agnes" somewhere in their "path" or filename
+- `find | grep "agnes" | grep "\.jpg$"` will find all files that contain the word "agnes" and finish with ".jpg" (we use `\.` to match the "."). It's a bit nasty though.
+- `find | grep "agnes.*\.jpg$"` does the same job. The '`.*`' in the middle means there can be any number of symbols in between
+- `find -type f -regex ".*agnes.*\.jpg$"` does exactly the same thing without `grep` but I always forget!
 
 # Distributions
 
@@ -161,5 +167,8 @@ As usual, the easiest way to use `dnf` is to press the tab key lots... but the m
 - `sudo dnf install terminator` - will install the terminator package
 - `sudo dnf install terminator` - will remove the terminator package
 
+# Services
+
+Virtually all the background processes in Linux are run using services. So, for instance, there is a service called "ssh" that runs in the background waiting for people to login using a secure shell. The useful command here is `systemctl` (system control). As ever, the tab key is your friend...
 
 
