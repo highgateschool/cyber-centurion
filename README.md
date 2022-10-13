@@ -16,6 +16,7 @@ If the **kernel** is at the heart of the Operating System, then the **shell** is
 
 Here are some basic shell commands that you should know about:
 
+
 ```ls``` - lists all the files in the present working directory
 
 - ``ls -l`` will give you the info in a nice list
@@ -25,7 +26,10 @@ Here are some basic shell commands that you should know about:
 - ```ls --help``` will give you a quick summary of options
 - ```man ls``` will give you the full manual for ```ls```
 
-```pwd``` - tells you the present working directory
+```sudo``` - will allow you to do things as the super user (root)
+- ```sudo nano /etc/ssh/sshd_config``` will let you edit the sshd config file
+
+- ```pwd``` - tells you the present working directory
 
 ```cd``` - changes the pwd to your default (home) directory
 
@@ -34,4 +38,21 @@ Here are some basic shell commands that you should know about:
 - ```cd ../..``` will move down two folders
 - ```cd ~/Pictures``` will move to the ```Pictures``` folder in your home directory (which can always be referred to using the ```~``` symbol)
 - ```cd ~/..``` will move you where?
+
+```passwd``` - will let you set your password
+- ```passwd agnes``` will let you set the password for the user agnes
+- ```passwd -d agnes``` will let you delete agnes's password (and then they won't be able to login with a password).
+- be careful!
+
+```gpasswd``` - will let you change some settings for a group
+- ```gpasswd -a agnes sudo``` will add agnes to the sudo group
+- ```gpasswd -d agnes sudo``` will remove agnes from the sudo group```id``` - tells you the user id (uid) of the current user, along with the group ids (gids) of all the groups to which they belong
+
+- ```id agnes``` will tell you the uid and gids for the user called agnes
+
+```getent``` - tells you information about various lists in the system (press tab to see them all!
+- ```getent group sudo``` - will tell you all the users in the sudo group
+- ```getent group``` - will tell you all the groups
+- ```getent services``` - will tell you all the services
+- ```getent services ssh``` - will tell you about the ssh service
 
