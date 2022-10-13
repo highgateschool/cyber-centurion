@@ -2,12 +2,26 @@
 
 # Linux
 
-Linux is the name given to the project started by Linus Torvalds in 1990 to build a POSIX compliant UNIX environment, built entirely from code which is unconstrained by commercial licenses. He started with the *kernel*, which is the core code that enables the operating system to communicate with the computer's components - the CPU, disk drive, mouse etc. You can see the effect of this by looking in the `/dev`, `/proc` and `/sys` folders: Like all UNIX systems, the peripherals are made accessible to the operating systems using filenames, so `/dev/sda1` is the first attached SCSI Disk and `/sys/cpu` gains access to the CPU. It goes without saying that *you need to be really careful* when accessing these folders, as messing around could literally wipe a disk or crash the computer. The kernel is updated regularly by the development teams, and is then used by the various distro-projects as the basis of their releases. Often an update of Ubuntu or Fedora will include a kernel update. You can see which one is running by looking in the file `/proc/version`, so just type `cat /proc/version`.
+Linux is the name given to the project started by Linus Torvalds in 1991 to build a POSIX compliant UNIX environment, built entirely from code which is unconstrained by commercial licenses.
+
+UNIX was the maintain operating system run by large companies at the time and licensing was getting very expensive and complicated; Torvalds' work fitted into the existing project called GNU (GNU is Not UNIX) which had been running since 1983. POSIX stands for Portable Operating System Interface (X), which also goes back to about 1988.
+
+He started with the *kernel*, which is the core code that enables the operating system to communicate with the computer's components - the CPU, disk drive, mouse etc. You can see the effect of this by looking in the `/dev`, `/proc` and `/sys` folders: Like all UNIX systems, the peripherals are made accessible to the operating systems using filenames, so `/dev/sda1` is the first attached SCSI Disk and `/sys/cpu` gains access to the CPU. It goes without saying that *you need to be really careful* when accessing these folders, as messing around could literally wipe a disk or crash the computer.
+
+The kernel is updated regularly by the development teams, and is then used by the various distro-projects as the basis of their releases. Often an update of Ubuntu or Fedora will include a kernel update. You can see which one is running by looking in the file `/proc/version`, so just type `cat /proc/version`.
 
 
-# BASH
+# BASH shell
 
-If the **kernel** is at the heart of the Operating System, then the **shell** is on the outside, and is the way that you interact with it. Windows is the shell that you will be most used to, and `cmd.exe` or PowerShell are both examples of Command Line shells. There are lots of shells, most of which have silly names `sh` (pronounced "ssshhhh"), `csh` (pronounced sea shell), `fish` (think about it) are all good examples. Most Linux distros use `BASH` (which means Bourne Again SHell) and Macs now use `zsh`. There are some important differences, but mostly they all have the same key commands and then their own funky quirks.
+If the **kernel** is at the heart of the Operating System, then the **shell** is on the outside, and is the way that you interact with it. Windows is the shell that you will be most used to, and `cmd.exe` or PowerShell are both examples of Command Line shells.
+
+There are lots of shells, most of which have silly names `sh` (pronounced "ssshhhh"), `csh` (pronounced sea shell), `fish` (think about it) are all good examples. Most Linux distros use `BASH` (which means Bourne Again SHell) and Macs now use `zsh` (zeta shell).
+
+There are some important differences, but mostly they all have the same basic commands and then their own funky quirks.
+
+You probably won't need to do this, but you can check your current default shell by typing `echo $SHELL` and you can change it using the command `chsh`. To find out more you can type `chsh --help`.
+
+
 
 ## Press the tab key lots
 
@@ -22,9 +36,9 @@ Just like in Minecraft, the tab key is used to "autocomplete" commands. Try this
 BASH knows how to autocomplete most (but not all) commands. This means that if you are not sure what to do then pressing tab will often give you a good hint. Be careful though. Typing the letter "a" then hitting tab will then get BASH to list _all commands_ that begin with the letter "a".
 
 Other useful tricks:
-- ctrl+P runs the last command again
-- ctrl+D drops (logs out) from the current logged-in user - so will often close the window
-- ctrl+L clears the screen
+- Ctrl+P runs the last command again
+- Ctrl+D drops (logs out) from the current logged-in user - so will often close the window
+- Ctrl+L clears the screen
 
 ## Getting around on the command line
 
@@ -56,7 +70,7 @@ Here are some basic shell commands that you should know about:
 `history` - shows you the history of all the commands that you have typed (including any mistakes - be careful!)
 - They are numbered, so you can then type `!21` to run item 21, for example
 - `!-2` will run the command second from the bottom
-- `!-1` and `!!` will both run the last command again (but ctrl+P is easier)
+- `!-1` and `!!` will both run the last command again (but Ctrl+P is easier)
 
 
 
