@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+  then
+    echo "Need a target directory"
+    exit 1
+fi
+
+DIRECTORY=$1
+
+echo "Listing items in $DIRECTORY"
+
+ls $DIRECTORY |
+while read -r line
+  do
+  if [ -d "$DIRECTORY/$line" ]
+    then
+    echo "$DIRECTORY/$line is a directory"
+  else
+    echo "$line is not a directory"
+  fi
+done
+

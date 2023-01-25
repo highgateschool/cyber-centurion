@@ -203,3 +203,126 @@ and find a specific one using
 `getent services | grep ssh`
 
 This has the bonus of also telling you which network port is being used!
+
+# Scripting in BASH
+
+All the commands that you are used to using in BASH can also be combined in a script. The obvious place to start is
+
+```shell
+#!/bin/bash
+
+echo "Hello World!"
+```
+
+You can send parameters to your scripts
+
+```shell
+#!/bin/bash
+
+if [ -z "$1" ]
+then
+  echo "Need a target directory"
+  exit 1
+fi
+
+DIRECTORY=$1
+
+echo "Listing items in $DIRECTORY"
+
+ls $DIRECTORY |
+while read -r line
+do
+  if [ -d "$DIRECTORY/$line" ]
+    then
+    echo "$DIRECTORY/$line is a directory"
+  else
+    echo "$line is not a directory"
+  fi
+done
+```
+
+This gives you a few ideas about how scripts work in BASH:
+- The if and while commands are pretty similar to the usual, but have funny ways of ending (no brackets or colons)
+- We can test for things like empty strings or directories using square brackets
+- You can finish a script early with an error using exit 1
+- This stuff is hard to remember BUT there are loads of online resources
+
+# Scripting and matching in BASH
+
+You'll have heard me singing the praises of the wonderful `grep` command. This really takes off when we have a script to use. Here is a shell script that will automate the process of looking through a directory to find specific matches...
+
+```shell
+#!/bin/bash
+
+if [ -z "$1" ]
+  then
+    echo "Need a target directory"
+    exit 1
+fi
+
+if [ -z "$2" ]
+  then
+    echo "Need a REGEX"
+    exit 1
+fi
+
+DIRECTORY=$1
+RE=$2
+
+echo "Listing items in $DIRECTORY and spotting REGEX $RE"
+
+ls $DIRECTORY |
+while read -r line
+  do
+  if echo $line | grep -q "$RE"
+    then
+    echo "$line matches the REGEX $RE"
+  else
+    echo "$line does not match the REGEX"
+  fi
+done
+```
+
+We can also use the excellent Stream EDitor to make changes...
+
+```shell
+#!/bin/bash
+
+if [ -z "$1" ]
+  then
+    echo "Need a target directory"
+    exit 1
+fi
+
+if [ -z "$2" ]
+  then
+    echo "Need a REGEX"
+    exit 1
+fi
+
+if [ -z "$3" ]
+  then
+    echo "Need a rename REGEX"
+    exit 1
+fi
+
+DIRECTORY=$1
+RE=$2
+SUB=$3
+
+echo "Listing items in $DIRECTORY and spotting REGEX $RE to rename using $SUB"
+
+ls $DIRECTORY |
+while read -r line
+  do
+  if echo $line | grep -q "$RE"
+    then
+    echo "$line matches the REGEX $RE"
+    new_line="$(echo $line | sed $SUB)"
+    echo "$line becomes $new"
+  else
+    echo "$line doesn't match"
+  fi
+done
+```
+
