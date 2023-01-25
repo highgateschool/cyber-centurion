@@ -326,3 +326,8 @@ while read -r line
 done
 ```
 
+# Good places to look
+
+- `crontab -l`
+- `/var/log/syslog`
+
