@@ -342,7 +342,7 @@ You'll have noticed at this stage that REGEX, when used with `sed` is an incredi
 
 You can look at one of the many online resources to see how this works, and if you really want to change the file directly then you can add a `-i` switch at the end.
 
-One question that was asked was whether we could replace all sequences of spaces with a single underline. In the same way that `[ ]*` would match any number of spaces, we should be able to match "at least one" using `[ ]+`.
+One question that was asked was whether we could replace all sequences of spaces with a single underline. In the same way that `[ ]*` would match any number of spaces (_including none at all_!), we should be able to match "at least one" using `[ ]+`.
 
 There is a "but" though: we need to tell `sed` that we are using "modern" REGEX to make it understand this. So on a Ubuntu machine or similar we would use the `-r` switch:
 
