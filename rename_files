@@ -24,7 +24,7 @@ SUB=$3
 
 echo "Listing items in $DIRECTORY and spotting REGEX $RE to rename using $SUB"
 
-ls $DIRECTORY |
+ls "$DIRECTORY" |
 while read -r line
   do
   if echo "$line" | grep -q "$RE"

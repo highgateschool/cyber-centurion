@@ -283,7 +283,11 @@ while read -r line
 done
 ```
 
-We can also use the excellent Stream EDitor to make changes...
+This script works by receiving a directory and an expression to match as its parameters.
+
+For example `find_files "/home/woody" "^a.*\.mp3$"` will find all files in the directory `/home/woody` whose filename begins with the letter 'a' and whose file extension is '.mp3'
+
+We can also use the excellent **s**tream **ed**itor to make changes. This script adds a third parameter that allows us to change the text using a substitution:
 
 ```shell
 #!/bin/bash
@@ -312,13 +316,13 @@ SUB=$3
 
 echo "Listing items in $DIRECTORY and spotting REGEX $RE to rename using $SUB"
 
-ls $DIRECTORY |
+ls "$DIRECTORY" |
 while read -r line
   do
-  if echo $line | grep -q "$RE"
+  if echo "$line" | grep -q "$RE"
     then
     echo "$line matches the REGEX $RE"
-    new_line="$(echo $line | sed $SUB)"
+    new="$(echo "$line" | sed "$SUB")"
     echo "$line becomes $new"
   else
     echo "$line doesn't match"
@@ -326,3 +330,28 @@ while read -r line
 done
 ```
 
+So a call like `rename_files "/home/woody" "^a.*\.mp3$" "s/\.mp3$/\.wav/"`will rename all files beginning with an 'a' whose file extension is '.mp3' into a file whose extension is '.wav'. Note that this script doesn't actually do the renaming. You could do this by adding the command 'mv "$line" "$new"'.
+
+You can actually try this out on the files in the directory containing this 'README.md': a useful way of referring to the current directory is to use something like `rename_file "./"  "^a.*\.mp3$" "s/\.mp3$/\.wav/"`.
+
+# REGEX and `sed`
+
+You'll have noticed at this stage that REGEX, when used with `sed` is an incredibly powerful tool. If you look online you will find lots of incredibly powerful REGEX patterns that can do things like validating postcodes or even checking that you have a sufficiently strong password.
+
+'sed' can actually be used directly on a file (or a pipe using `|`). As an example, suppose we want to replace all spaces with underscores in our file `lines_with_spaces`. Something like this will do the job: `sed "s/[ ]/_/g" "lines_with_spaces"`.
+
+You can look at one of the many online resources to see how this works, and if you really want to change the file directly then you can add a `-i` switch at the end.
+
+One question that was asked was whether we could replace all sequences of spaces with a single underline. In the same way that `[ ]*` would match any number of spaces, we should be able to match "at least one" using `[ ]+`.
+
+There is a "but" though: we need to tell `sed` that we are using "modern" REGEX to make it understand this. So on a Ubuntu machine or similar we would use the `-r` switch:
+
+`sed -r "s/[ ]+/_/g" "lines_with_spaces"`
+
+I'm using a Mac, so for me it is a `-E`:
+
+`sed -E "s/[ ]+/_/g" "lines_with_spaces"`
+
+If you wanted to do this only for lines that begin with the letter "l" then you can add a match condition first:
+
+`sed -E "/^l/s/[ ]+/_/g" "lines_with_spaces"`
