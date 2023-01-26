@@ -355,3 +355,20 @@ I'm using a Mac, so for me it is a `-E`:
 If you wanted to do this only for lines that begin with the letter "l" then you can add a match condition first:
 
 `sed -E "/^l/s/[ ]+/_/g" "lines_with_spaces"`
+
+# Good places to look
+
+Believe it or not, a lot of these came from Github Copilot auto complete...
+
+- `crontab -l`
+- `/var/log/syslog`
+- `/etc/apt/sources.list`
+- `/etc/apt/sources.list.d/`
+- `/etc/ssh/ssh_config`
+- `/etc/ssh/sshd_config`
+- `/etc/hosts`
+- `/etc/hostname`
+- `/etc/hosts.allow`
+- `/etc/hosts.deny`
+
+Don't forget that you can get `man` pages for all of these using `man <command>`, including things like `man hosts` and `man hosts.allow`.
