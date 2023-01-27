@@ -356,7 +356,7 @@ If you wanted to do this only for lines that begin with the letter "l" then you 
 
 `sed -E "/^l/s/[ ]+/_/g" "lines_with_spaces"`
 
-This is clearly really cryptic, but also really fun. You can find out about the command by using `man sed`, and obviously there is a vast amount more to be found out online!
+This is clearly really cryptic, but also really fun. You can find out about the command by using `man sed`, and obviously there is a vast amount more to be found out online: [this is a good place to start](https://www.grymoire.com/Unix/Sed.html).
 
 A historic note that I had to share: regular expressions were so called because they were used to describe the regularities in the English language. They were popularised by Ken Thompson when he used them in the `ed` program which was his text **ed**itor for UNIX. A fun fact that I have to share with everyone: to use a regular expression in `ed` you would type `g` then `re` then `p`, separated by a `/`. So when the idea was ported to the shell we got `grep`! `sed` was introduced by Steve Bourne, who was the author of the `sh` shell. `BASH` is a descendant of `sh` and stands for "Bourne Again SHell". `sed` is obviously a descendant of `ed`.
 
